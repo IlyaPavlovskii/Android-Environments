@@ -1,0 +1,17 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+    id 'maven-publish'
+}
+
+group 'by.bulba.android.environments'
+version '1.0-SNAPSHOT'
+
+gradlePlugin {
+    plugins {
+        create("AndroidEnvironmentsPlugin") {
+            id = "by.bulba.android.environments"
+            implementationClass = "by.bulba.android.environments.AndroidEnvironmentsPlugin"
+        }
+    }
+}

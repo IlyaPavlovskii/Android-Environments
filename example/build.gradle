@@ -19,8 +19,8 @@ android {
         }
     }
     environments {
-        configPath = "config"
-        configFile = "config.properties"
+        configPath = "asd"
+        configFile = "my_file.properties1"
         useProductFlavors = true
         useBuildTypes = true
     }

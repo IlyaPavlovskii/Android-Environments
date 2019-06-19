@@ -1,6 +1,6 @@
 package by.bulba.android.environments
 
-class AndroidEnvironmentsPluginExtension {
+class AndroidEnvironmentsExtension {
     String configPath = "config"
     String configFile = "config.properties"
     boolean useBuildTypes = true

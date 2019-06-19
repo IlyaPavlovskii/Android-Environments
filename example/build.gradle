@@ -1,15 +1,8 @@
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath("by.bulba.android.environments:android-environments:1.0-SNAPSHOT")
-    }
-}
-
-apply plugin: "by.bulba.android.environments"
-
-androidEnvironments {
-    configFile = "file.propepries"
-    useProductFlavors = false
-}
+//apply plugin: "by.bulba.android.environments"
+//
+////android {
+//    environments {
+//        configFile = "file.propepries"
+//        useProductFlavors = false
+//    }
+////}

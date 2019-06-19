@@ -6,16 +6,19 @@ import org.gradle.api.Project
 class AndroidEnvironmentsPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
+        project.extensions
         def ext = project.extensions.create(
-                "androidEnvironments",
-                AndroidEnvironmentsPluginExtension
+                "environments",
+                AndroidEnvironmentsExtension
         )
+
         project.task("androidEnvTest") {
             doLast {
                 println()
                 println("${ext.configPath}/${ext.configFile}")
                 println("buildTypes: ${ext.useBuildTypes}")
                 println("productFlavors: ${ext.useProductFlavors}")
+
             }
         }
     }

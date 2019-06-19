@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath("by.bulba.android.environments:android-environments:1.0-SNAPSHOT")
+    }
+}
+
 plugins {
     id 'java-gradle-plugin'
     id 'groovy'
@@ -14,4 +23,12 @@ gradlePlugin {
             implementationClass = "by.bulba.android.environments.AndroidEnvironmentsPlugin"
         }
     }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
 }

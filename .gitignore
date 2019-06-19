@@ -1,3 +1,10 @@
 .gradle
 build
 local.properties
+out/
+.idea/workspace.xml
+.idea/caches
+.idea/uiDesigner.xml
+.idea/libraries
+example/build
+out

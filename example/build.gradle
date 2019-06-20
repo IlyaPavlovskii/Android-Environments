@@ -1,5 +1,5 @@
+apply plugin: 'com.android.application'
 apply plugin: 'by.bulba.android.environments'
-apply plugin: 'com.android.application'//Test library plugin
 
 android {
     compileSdkVersion 28
@@ -14,10 +14,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            buildConfigField "String", "TEST_VALUE", "\"MY_TEST_VALUE\""
+        }
     }
     environments {
-        configFile = "file.propepries"
-        useProductFlavors = false
+        configPath = "config"
+        configFile = "config.properties"
+        useProductFlavors = true
+        useBuildTypes = true
     }
     flavorDimensions 'default'
     productFlavors {

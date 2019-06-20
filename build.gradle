@@ -1,9 +1,12 @@
 buildscript {
     repositories {
+        google()
         mavenLocal()
     }
     dependencies {
-        classpath("by.bulba.android.environments:android-environments:1.0-SNAPSHOT")
+        classpath 'com.android.tools.build:gradle:3.4.1'
+        //classpath("by.bulba.android.environments:android-environments:1.0-SNAPSHOT")
+        classpath fileTree(include: ['*.jar'], dir: 'build/libs')
     }
 }
 
@@ -25,10 +28,15 @@ gradlePlugin {
     }
 }
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
 }
 
 dependencies {
+    implementation 'com.android.tools.build:gradle:3.4.1'
     testImplementation 'junit:junit:4.12'
 }

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="android-environments_main" target="1.8" />
+      <module name="android-environments_test" target="1.8" />
       <module name="example_main" target="1.8" />
       <module name="example_test" target="1.8" />
     </bytecodeTargetLevel>

@@ -10,7 +10,6 @@ class PropertyConfigReader implements ConfigReader {
     @Override
     Collection<ConfigValue> getConfigValues() {
         def properties = new Properties()
-        println("File exists: "+propertiesFile.exists())
         if (propertiesFile.exists()) {
             properties.load(new FileInputStream(propertiesFile))
         }
@@ -20,7 +19,6 @@ class PropertyConfigReader implements ConfigReader {
     private static Collection<ConfigValue> readPropertyFile(Properties properties) {
         def collection = new ArrayList()
         properties.entrySet().forEach { entry ->
-            println("Key: " + entry.key + " Value: " + entry.value)
             def configValue = new ConfigValue.Builder()
                     .key(toConfigKey(entry.key as String))
                     .type(parseValueType(entry.value as String))

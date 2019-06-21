@@ -19,45 +19,29 @@ class AndroidEnvironmentsPlugin implements Plugin<Project> {
                 "environments",
                 AndroidEnvironmentsExtension
         )
-        println()
-        println("${ext.configPath}/${ext.configFile}")
-        println("buildTypes: ${ext.useBuildTypes}")
-        println("productFlavors: ${ext.useProductFlavors}")
-        def configFilePattern = project.getRootDir().toString() + "/" +
-                ext.configPath + "/%s/" + ext.configFile
-        println("configFilePattern: " + configFilePattern)
-        try {
+        project.tasks.create("androidConfigEnvironments").doFirst {
+            def configFilePattern = project.getRootDir().toString() + "/" +
+                    ext.configPath + "/%s/" + ext.configFile
+            try {
 
-            def androidExtension = project.extensions.getByName("android")
-
-            if (ext.useBuildTypes && androidExtension instanceof BaseExtension) {
-                processBuildTypes(configFilePattern, androidExtension as BaseExtension)
+                def androidExtension = project.extensions.getByName("android")
+                if (ext.useBuildTypes && androidExtension instanceof BaseExtension) {
+                    processBuildTypes(configFilePattern, androidExtension as BaseExtension)
+                }
+                if (ext.useProductFlavors && androidExtension instanceof AppExtension) {
+                    processApplicationVariants(configFilePattern, androidExtension as AppExtension)
+                }
+            } catch (UnknownDomainObjectException udoe) {
+                udoe.printStackTrace()
             }
-            println()
-            println()
-            println("ext.useProductFlavors: " + ext.useProductFlavors + " Ext: " + (androidExtension instanceof AppExtension))
-            if (ext.useProductFlavors && androidExtension instanceof AppExtension) {
-                processApplicationVariants(configFilePattern, androidExtension as AppExtension)
-            }
-        } catch (UnknownDomainObjectException udoe) {
-            udoe.printStackTrace()
-        } finally {
-            println("COMPLETE")
         }
-//        project.tasks.create("configEnvironments").doFirst {
-//        }
     }
 
     void processBuildTypes(String filePattern, BaseExtension extension) {
         extension.buildTypes.forEach { buildType ->
             def path = String.format(filePattern, buildType.name)
-            println("extension.buildType:" + path)
             configReader.propertiesFile = new File(path)
             configReader.configValues.forEach { configValue ->
-                println("configValue." +
-                        " Key: " + configValue.key +
-                        " Type: " + configValue.type +
-                        " Value: " + configValue.value)
                 buildType.buildConfigField(
                         configValue.type.configString,
                         configValue.key,
@@ -68,7 +52,7 @@ class AndroidEnvironmentsPlugin implements Plugin<Project> {
     }
 
     void processApplicationVariants(String filePattern, AppExtension extension) {
-        extension.applicationVariants.forEach { variant ->
+        extension.applicationVariants.all { variant ->
             def path = String.format(filePattern, variant.flavorName)
             println("extension.buildType:" + path)
             configReader.propertiesFile = new File(path)

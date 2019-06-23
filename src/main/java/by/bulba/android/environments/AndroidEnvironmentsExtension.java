@@ -1,10 +1,13 @@
 package by.bulba.android.environments;
 
 public class AndroidEnvironmentsExtension {
-    String configPath = "config";
-    String configFile = "config.properties";
-    boolean useBuildTypes = false;
-    boolean useProductFlavors = false;
+
+    public static final String EXTENSIONS_NAME = "environments";
+
+    public String configPath = "config";
+    public String configFile = "config.properties";
+    public boolean useBuildTypes = false;
+    public boolean useProductFlavors = false;
 
     @Override
     public String toString() {

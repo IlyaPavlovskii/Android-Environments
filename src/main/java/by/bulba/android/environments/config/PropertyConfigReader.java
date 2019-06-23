@@ -1,8 +1,5 @@
 package by.bulba.android.environments.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,9 +7,10 @@ import java.util.Properties;
 
 public class PropertyConfigReader implements ConfigReader {
 
-    public File propertiesFile;
+    private final Properties properties;
 
-    public PropertyConfigReader() {
+    public PropertyConfigReader(Properties properties) {
+        this.properties = properties;
     }
 
     private static Collection<ConfigValue> readPropertyFile(Properties properties) {
@@ -54,15 +52,6 @@ public class PropertyConfigReader implements ConfigReader {
 
     @Override
     public Collection<ConfigValue> getConfigValues() {
-        Properties properties = new Properties();
-        if (propertiesFile.exists()) {
-            try {
-                properties.load(new FileInputStream(propertiesFile));
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("");
-            }
-        }
         return readPropertyFile(properties);
     }
 }

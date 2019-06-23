@@ -20,7 +20,7 @@ android {
     }
     environments {
         useBuildTypes = true
-        useProductFlavors = false
+        useProductFlavors = true
     }
     flavorDimensions 'default'
     productFlavors {

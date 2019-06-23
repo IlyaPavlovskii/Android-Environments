@@ -6,34 +6,31 @@ import com.android.build.gradle.AppExtension;
 import com.android.build.gradle.BaseExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.Task;
 import org.gradle.api.UnknownDomainObjectException;
 import org.jetbrains.annotations.NotNull;
 
 class AndroidEnvironmentsPlugin implements Plugin<Project> {
 
-    private static final String TASK_NAME = "androidBuildConfigEnvironments";
+    private AndroidEnvironmentsExtension ext;
 
     @Override
     public void apply(@NotNull Project project) {
         project.getExtensions().create(AndroidEnvironmentsExtension.EXTENSIONS_NAME,
                 AndroidEnvironmentsExtension.class);
-        project.task(TASK_NAME,
-                task -> task.mustRunAfter("preBuild").doLast(this::executeTask));
+        project.afterEvaluate(project1 -> {
+            ext = project1.getExtensions()
+                    .findByType(AndroidEnvironmentsExtension.class);
+            if (ext == null) {
+                ext = new AndroidEnvironmentsExtension();
+            }
+            executeTask(project);
+        });
     }
 
-    private void executeTask(Task task) {
-        AndroidEnvironmentsExtension ext = task.getProject()
-                .getExtensions()
-                .findByType(AndroidEnvironmentsExtension.class);
-
-        if (ext == null) {
-            ext = new AndroidEnvironmentsExtension();
-        }
-        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(task.getProject(), ext);
-
+    private void executeTask(Project project) {
+        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(project, ext);
         try {
-            Object androidExtension = task.getProject()
+            Object androidExtension = project
                     .getExtensions()
                     .getByName("android");
             if (ext.useBuildTypes && androidExtension instanceof BaseExtension) {

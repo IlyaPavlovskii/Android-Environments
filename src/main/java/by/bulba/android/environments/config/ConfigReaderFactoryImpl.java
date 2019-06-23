@@ -2,6 +2,7 @@ package by.bulba.android.environments.config;
 
 import by.bulba.android.environments.AndroidEnvironmentsExtension;
 import org.gradle.api.Project;
+import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +25,8 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
         return createPropertyConfigReader(file);
     }
 
-    private ConfigReader createPropertyConfigReader(File propertiesFile) {
+    @VisibleForTesting
+    ConfigReader createPropertyConfigReader(File propertiesFile) {
         Properties properties = new Properties();
         if (propertiesFile.exists()) {
             try {
@@ -36,9 +38,10 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
         return new PropertyConfigReader(properties);
     }
 
-    private String readConfigFilePattern(Project project,
-                                         AndroidEnvironmentsExtension ext) {
-        return project.getRootDir().toString() + "/" +
+    @VisibleForTesting
+    String readConfigFilePattern(Project project,
+                                 AndroidEnvironmentsExtension ext) {
+        return project.getRootDir().getPath() + "/" +
                 ext.configPath + "/%s/" + ext.configFile;
     }
 }

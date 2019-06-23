@@ -26,29 +26,47 @@ public class ConfigValue {
         return value;
     }
 
-    static class Builder {
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof ConfigValue) {
+            return key.equals(((ConfigValue) obj).key) &&
+                    value.equals(((ConfigValue) obj).value) &&
+                    type == ((ConfigValue) obj).type;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return key.hashCode() + value.hashCode();
+    }
+
+    public static class Builder {
 
         private ConfigValue configValue = new ConfigValue();
 
-        Builder() {
+        public Builder() {
         }
 
-        Builder key(String key) {
+        public Builder key(String key) {
             configValue.key = key;
             return this;
         }
 
-        Builder type(ConfigType type) {
+        public Builder type(ConfigType type) {
             configValue.type = type;
             return this;
         }
 
-        Builder value(String value) {
+        public Builder value(String value) {
             configValue.value = value;
             return this;
         }
 
-        ConfigValue build() {
+        public ConfigValue build() {
             return configValue;
         }
 

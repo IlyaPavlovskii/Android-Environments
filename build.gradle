@@ -39,4 +39,6 @@ allprojects {
 dependencies {
     implementation 'com.android.tools.build:gradle:3.4.1'
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.21.0'
+    testCompile "org.junit.jupiter:junit-jupiter-params:5.4.2"
 }

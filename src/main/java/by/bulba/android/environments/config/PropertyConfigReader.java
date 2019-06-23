@@ -1,5 +1,7 @@
 package by.bulba.android.environments.config;
 
+import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +15,8 @@ public class PropertyConfigReader implements ConfigReader {
         this.properties = properties;
     }
 
-    private static Collection<ConfigValue> readPropertyFile(Properties properties) {
+    @VisibleForTesting
+    Collection<ConfigValue> readPropertyFile(Properties properties) {
         List<ConfigValue> collection = new ArrayList<>();
         properties.forEach((key, value) -> {
             ConfigValue configValue = new ConfigValue.Builder()
@@ -26,12 +29,14 @@ public class PropertyConfigReader implements ConfigReader {
         return collection;
     }
 
-    private static String toConfigKey(String key) {
+    @VisibleForTesting
+    String toConfigKey(String key) {
         return key.replaceAll("(\\.)|(-)", "_")
                 .toUpperCase();
     }
 
-    private static ConfigType parseValueType(String value) {
+    @VisibleForTesting
+    ConfigType parseValueType(String value) {
         if (value == null) {
             throw new NullPointerException("Missing configuration value");
         }

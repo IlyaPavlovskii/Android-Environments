@@ -5,19 +5,17 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
-        //classpath("by.bulba.android.environments:android-environments:1.0-SNAPSHOT")
         classpath fileTree(include: ['*.jar'], dir: 'build/libs')
     }
 }
 
 plugins {
     id 'java-gradle-plugin'
-    id 'groovy'
     id 'maven-publish'
 }
 
 group 'by.bulba.android.environments'
-version '1.0-SNAPSHOT'
+version '0.9.0'
 
 gradlePlugin {
     plugins {

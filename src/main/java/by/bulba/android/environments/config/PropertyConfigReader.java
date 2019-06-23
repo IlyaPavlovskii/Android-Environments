@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * {@link ConfigValue} for '.property' extension files.
+ * */
 public class PropertyConfigReader implements ConfigReader {
 
     private final Properties properties;

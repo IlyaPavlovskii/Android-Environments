@@ -9,6 +9,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Simple implementation of {@link ConfigReaderFactory}.
+ * */
 public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
 
     private final String configFilePattern;

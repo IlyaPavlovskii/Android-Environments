@@ -1,6 +1,10 @@
 package by.bulba.android.environments.config;
 
+/**
+ * Support object for build config field on {@link com.android.build.gradle.BaseExtension}.
+ * */
 public class ConfigValue {
+
     private String key;
     private ConfigType type;
     private String value;
@@ -14,14 +18,23 @@ public class ConfigValue {
         this.value = value;
     }
 
+    /**
+     * @return key name.
+     * */
     public String getKey() {
         return key;
     }
 
+    /**
+     * @return config value type.
+     * */
     public ConfigType getType() {
         return type;
     }
 
+    /**
+     * @return configuration value.
+     * */
     public String getValue() {
         return value;
     }
@@ -44,6 +57,9 @@ public class ConfigValue {
         return key.hashCode() + value.hashCode();
     }
 
+    /**
+     * {@link ConfigValue} builder.
+     * */
     public static class Builder {
 
         private ConfigValue configValue = new ConfigValue();
@@ -51,21 +67,33 @@ public class ConfigValue {
         public Builder() {
         }
 
+        /**
+         * Set configuration key value and return builder instance.
+         * */
         public Builder key(String key) {
             configValue.key = key;
             return this;
         }
 
+        /**
+         * Set configuration build type value and return builder instance.
+         * */
         public Builder type(ConfigType type) {
             configValue.type = type;
             return this;
         }
 
+        /**
+         * Set configuration value and return builder instance.
+         * */
         public Builder value(String value) {
             configValue.value = value;
             return this;
         }
 
+        /**
+         * Build {@link ConfigValue} instance.
+         * */
         public ConfigValue build() {
             return configValue;
         }

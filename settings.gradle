@@ -1,3 +1,11 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        maven {
+            url = "https://jitpack.io"
+        }
+    }
+}
+
 include ':example'
 rootProject.name = 'android-environments'
-

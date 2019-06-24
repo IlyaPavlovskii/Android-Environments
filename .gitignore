@@ -6,5 +6,11 @@ out/
 .idea/caches
 .idea/uiDesigner.xml
 .idea/libraries
+.idea/android-environments.iml
+.idea/assetWizardSettings.xml
+.idea/modules/example.iml
+.idea/misc.xml
+android-environments.iml
 example/build
+example/example.iml
 out

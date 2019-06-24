@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="4">
-  <component name="AppEngineStandardGradleModuleComponent">
-    <option name="gradleBuildDir" value="$MODULE_DIR$/../../../example/build" />
-    <option name="gradleModuleDir" value="$MODULE_DIR$/../../../example" />
-  </component>
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -21,7 +17,8 @@
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../example/src/main/res;file://$MODULE_DIR$/../../../example/build/generated/res/resValues/free/debug" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>

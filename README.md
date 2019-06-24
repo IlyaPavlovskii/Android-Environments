@@ -1,6 +1,7 @@
 # Android Environments build gradle plugin
 [![](https://jitpack.io/v/IlyaPavlovskii/Android-Environments.svg)](https://jitpack.io/#IlyaPavlovskii/Android-Environments)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CI](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)
 
 Android Environments plugin helps us to avoid manual declaration of build 
 config fields in each of the build types or product flavors. It's no longer required

@@ -1,12 +1,35 @@
 # Android Environments build gradle plugin
+[![](https://jitpack.io/v/IlyaPavlovskii/Android-Environments.svg)](https://jitpack.io/#IlyaPavlovskii/Android-Environments)
 
 Android Environments plugin helps us to avoid manual declaration build 
 config fields in each build types or product flavors. No longer required
 to write `buildConfigField` for each fields.
 
 ### How to install
-TBD
- 
+Add next fields in your root `build.gradle` file:
+```groovy
+buildscript {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:0.9.0'
+    }
+}
+```
+
+Then setup your application `build.gradle` file:
+```groovy
+apply plugin: 'by.bulba.android.environments'
+
+android {
+    environments {
+        useBuildTypes = true
+        useProductFlavors = true
+    }
+}
+```
+
 ### How to use
 
 Just add `environments` extension in your project `build.gradle` file 

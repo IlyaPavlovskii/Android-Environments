@@ -1,4 +1,5 @@
 # Android Environments build gradle plugin
+classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:0.9.0'
 
 Плагин предназначен для устранения копирования деклараций переменных 
 окружения для различных типов. Он помогает разработчику избавиться от
@@ -6,7 +7,29 @@
 автоматически.
 
 ### Как установить
-TBD
+Добавьте следующие строки в Ваш корневой `build.gradle` файл:
+```groovy
+buildscript {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:0.9.0'
+    }
+}
+```
+
+Добавьте плагин и его расширение в `build.gradle` файл вашего приложения:
+```groovy
+apply plugin: 'by.bulba.android.environments'
+
+android {
+    environments {
+        useBuildTypes = true
+        useProductFlavors = true
+    }
+}
+```
  
 ### Как использовать
 

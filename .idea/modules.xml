@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-environments.iml" filepath="$PROJECT_DIR$/android-environments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-environments_main.iml" filepath="$PROJECT_DIR$/.idea/modules/android-environments_main.iml" group="android-environments" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-environments_test.iml" filepath="$PROJECT_DIR$/.idea/modules/android-environments_test.iml" group="android-environments" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
     </modules>
   </component>

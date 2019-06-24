@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="android-environments" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" type="JAVA_MODULE" version="4">
+  <component name="AppEngineStandardGradleModuleComponent">
+    <option name="gradleBuildDir" value="$MODULE_DIR$/build" />
+    <option name="gradleModuleDir" value="$MODULE_DIR$" />
+  </component>
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -121,7 +125,15 @@
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: byte-buddy-agent-1.9.7" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: objenesis-2.6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: opentest4j-1.1.1" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: _home_ipavlovskii_Work_Android_Environments_build_pluginUnderTestMetadata" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: gradle-test-kit-5.1.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: _Users_trane91_Documents_Projects_Android_android_environments_build_pluginUnderTestMetadata" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
+    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
   </component>
 </module>

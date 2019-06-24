@@ -10,6 +10,8 @@ out/
 .idea/assetWizardSettings.xml
 .idea/modules/example.iml
 .idea/misc.xml
+.idea/modules.xml
+.idea/gradle.xml
 android-environments.iml
 example/build
 example/example.iml

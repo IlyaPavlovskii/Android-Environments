@@ -112,13 +112,13 @@
     <orderEntry type="library" exported="" name="Gradle: gradle-installation-beacon-5.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: junit-jupiter-params-5.4.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: junit-4.12" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: mockito-core-2.21.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: mockito-core-2.25.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: junit-jupiter-api-5.4.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: junit-platform-commons-1.4.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: apiguardian-api-1.0.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: hamcrest-core-1.3" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: byte-buddy-1.8.15" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: byte-buddy-agent-1.8.15" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: byte-buddy-1.9.7" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: byte-buddy-agent-1.9.7" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: objenesis-2.6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: opentest4j-1.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: _home_ipavlovskii_Work_Android_Environments_build_pluginUnderTestMetadata" level="project" />

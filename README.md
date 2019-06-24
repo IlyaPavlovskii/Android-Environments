@@ -1,9 +1,9 @@
 # Android Environments build gradle plugin
 [![](https://jitpack.io/v/IlyaPavlovskii/Android-Environments.svg)](https://jitpack.io/#IlyaPavlovskii/Android-Environments)
 
-Android Environments plugin helps us to avoid manual declaration build 
-config fields in each build types or product flavors. No longer required
-to write `buildConfigField` for each fields.
+Android Environments plugin helps us to avoid manual declaration of build 
+config fields in each of the build types or product flavors. It's no longer required
+to write `buildConfigField` for every single field.
 
 ### How to install
 Add next fields in your root `build.gradle` file:
@@ -33,7 +33,7 @@ android {
 ### How to use
 
 Just add `environments` extension in your project `build.gradle` file 
-and setup it. By this extension you can setup your configuration file
+and set it up. This extension provides you a way to define your configuration file
 location and build config field rules.
  
 [build.gradle]
@@ -56,12 +56,12 @@ environments {
 }
 ``` 
 
-Then locate all your configuration files by build types and 
+Then you'll be able to locate all of your configuration files by build types and 
 product flavors folders.
 
 ![Configuration directory!](img/config.png "Configuration directory")
 
-Plugin supports only `.properties` extension of file. 
+Plugin supports `.properties` file extension only.
 ```properties
 key.build.type.value="debug value"
 key-int=123
@@ -69,8 +69,8 @@ key-LOng=78L
 KEY_float=32.1f
 key.some.boolean=true
 ```
-Plugin is smart and convert to your environment field to known type
-(String,Integer,Long,Float or Boolean) .
+Plugin is intellegent enough to automatically convert your environment fields to the known types
+(String, Integer, Long, Float or Boolean).
 
 ```java
 public final class BuildConfig {

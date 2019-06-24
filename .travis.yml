@@ -3,8 +3,9 @@ install: true
 jdk:
   - oraclejdk9
 dist: trusty
+before_script:
+  - rm example/build.gradle
 script:
-  - ./gradlew build test jacocoCoverage -x example:build -x example:test
+  - ./gradlew build test jacocoCoverage
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-

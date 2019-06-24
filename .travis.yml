@@ -3,6 +3,7 @@ jdk:
   - oraclejdk9
 dist: trusty
 script:
-  - ./gradlew build test
+  - ./gradlew build test jacocoCoverage -x example:build -x example:test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+

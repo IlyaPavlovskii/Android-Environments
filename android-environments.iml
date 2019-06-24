@@ -27,7 +27,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
-      <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -127,13 +126,5 @@
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: opentest4j-1.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: gradle-test-kit-5.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: _Users_trane91_Documents_Projects_Android_android_environments_build_pluginUnderTestMetadata" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
-    <orderEntry type="library" exported="" name="android-environments.android-environments-0.9.0" level="project" />
   </component>
 </module>

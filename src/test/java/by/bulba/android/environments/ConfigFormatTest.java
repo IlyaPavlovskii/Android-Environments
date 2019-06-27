@@ -15,16 +15,36 @@
  */
 package by.bulba.android.environments;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.gradle.internal.impldep.org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-@RunWith(JUnit4.class)
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class ConfigFormatTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Parameterized.Parameters
+    public static Stream<Arguments> provideParametrizedData() {
+        return Stream.of(
+                Arguments.of("json", ConfigFormat.JSON),
+                Arguments.of("properties", ConfigFormat.PROPERTIES)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideParametrizedData")
+    public void checkParser(String input, ConfigFormat configFormat) {
+        assertEquals(configFormat, ConfigFormat.parse(input));
+    }
+
+    @Test
     public void throwExceptionWhenTryToParseUnknownFormat() {
-        ConfigFormat.parse("unknown");
+        assertThrows(IllegalArgumentException.class, () -> ConfigFormat.parse("unknown"));
     }
 
 }

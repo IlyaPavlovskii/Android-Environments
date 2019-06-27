@@ -1,15 +1,14 @@
 apply plugin: 'jacoco'
 
-tasks.create(name: "jacocoCoverage", type: JacocoReport, dependsOn: "test") {
-    group = "Reporting"
-    description = "Generate Jacoco coverage reports for the test build."
+jacoco {
+    toolVersion = "0.8.4"
+}
 
-    sourceSets sourceSets.main
-    executionData fileTree(project.rootDir.absolutePath).include("build/jacoco/test.exec")
-    reports {
-        xml.enabled true
-        xml.destination file("${buildDir}/reports/jacoco/report.xml")
-        html.enabled = true
-        html.destination file("${buildDir}/jacocoAndroidEnvironmentsHtml")
+jacocoTestReport {
+    afterEvaluate {
+        reports {
+            xml.enabled true
+            html.enabled = true
+        }
     }
 }

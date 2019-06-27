@@ -31,7 +31,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(JUnit4.class)
 public class ConfigReaderFactoryImplTest {
 
     private static final String ROOT_PATH = "some/root/dir";

@@ -1,40 +1,40 @@
-apply plugin: 'com.android.application'
-apply plugin: 'by.bulba.android.environments'
-
-android {
-    compileSdkVersion 28
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            buildConfigField "String", "TEST_VALUE", "\"MY_TEST_VALUE\""
-        }
-    }
-    environments {
-        useBuildTypes = true
-        useProductFlavors = true
-    }
-    flavorDimensions 'default'
-    productFlavors {
-        free {
-            dimension 'default'
-            applicationId 'com.bulba.android.environments.free'
-        }
-        paid {
-            dimension 'default'
-            applicationId 'com.bulba.android.environments.paid'
-        }
-    }
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-}
+//apply plugin: 'com.android.application'
+//apply plugin: 'by.bulba.android.environments'
+//
+//android {
+//    compileSdkVersion 28
+//    defaultConfig {
+//        minSdkVersion 16
+//        targetSdkVersion 28
+//        versionCode 1
+//        versionName "1.0"
+//    }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//        debug {
+//            buildConfigField "String", "TEST_VALUE", "\"MY_TEST_VALUE\""
+//        }
+//    }
+//    environments {
+//        useBuildTypes = true
+//        useProductFlavors = true
+//    }
+//    flavorDimensions 'default'
+//    productFlavors {
+//        free {
+//            dimension 'default'
+//            applicationId 'com.bulba.android.environments.free'
+//        }
+//        paid {
+//            dimension 'default'
+//            applicationId 'com.bulba.android.environments.paid'
+//        }
+//    }
+//}
+//
+//dependencies {
+//    implementation 'androidx.appcompat:appcompat:1.0.2'
+//}

@@ -6,6 +6,6 @@ dist: trusty
 before_script:
   - rm example/build.gradle
 script:
-  - ./gradlew build test jacocoCoverage
+  - ./gradlew build test jacocoTestReport
 after_success:
   - bash <(curl -s https://codecov.io/bash)

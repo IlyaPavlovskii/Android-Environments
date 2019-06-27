@@ -65,11 +65,6 @@ public class PropertyConfigReaderTest {
     }
 
     @Test
-    public void checkConfigKeyConversion() {
-        assertEquals(EXPECTED_KEY, reader.toConfigKey(SOURCE_KEY));
-    }
-
-    @Test
     public void readPropertyFileWhenPropertiesAreNotEmpty() {
         Properties props = new Properties();
         props.setProperty(SOURCE_KEY, SOURCE_VALUE);

@@ -16,31 +16,60 @@
 package by.bulba.android.environments.config;
 
 import by.bulba.android.environments.AndroidEnvironmentsExtension;
+import by.bulba.android.environments.ConfigFormat;
 import org.gradle.api.Project;
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
 /**
  * Simple implementation of {@link ConfigReaderFactory}.
- * */
+ */
 public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
 
     private final String configFilePattern;
+    private final ConfigFormat configFormat;
 
     public ConfigReaderFactoryImpl(Project project,
                                    AndroidEnvironmentsExtension extension) {
         configFilePattern = readConfigFilePattern(project, extension);
+        configFormat = ConfigFormat.parse(extension.format);
     }
 
     @Override
     public ConfigReader create(String subConfig) {
         String filePath = String.format(configFilePattern, subConfig);
         File file = new File(filePath);
-        return createPropertyConfigReader(file);
+        switch (configFormat) {
+            case JSON:
+                return createJsonConfigReader(file);
+            case PROPERTIES:
+            default:
+                return createPropertyConfigReader(file);
+        }
+    }
+
+    @VisibleForTesting
+    ConfigReader createJsonConfigReader(File file) {
+        JSONObject jsonObject;
+        try {
+            if (file.exists()) {
+                JSONParser jsonParser = new JSONParser();
+                jsonObject = (JSONObject) jsonParser.parse(new FileReader(file));
+            } else {
+                jsonObject = new JSONObject();
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return new JsonConfigReader(jsonObject);
     }
 
     @VisibleForTesting

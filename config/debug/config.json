@@ -1,0 +1,6 @@
+{
+  "key.json.build.type.value": "json debug value",
+  "key.json.build.type.bool": true,
+  "key.json.build.type.int": 1,
+  "key.json.build.type.float": 3.4
+}

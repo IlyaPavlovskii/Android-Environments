@@ -24,8 +24,8 @@ import java.util.Properties;
 
 /**
  * {@link ConfigValue} for '.property' extension files.
- * */
-public class PropertyConfigReader implements ConfigReader {
+ */
+public class PropertyConfigReader extends BaseConfigReader {
 
     private final Properties properties;
 
@@ -45,12 +45,6 @@ public class PropertyConfigReader implements ConfigReader {
             collection.add(configValue);
         });
         return collection;
-    }
-
-    @VisibleForTesting
-    String toConfigKey(String key) {
-        return key.replaceAll("(\\.)|(-)", "_")
-                .toUpperCase();
     }
 
     @VisibleForTesting

@@ -2,10 +2,12 @@ buildscript {
     repositories {
         google()
         maven { url 'https://jitpack.io' }
+        mavenLocal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
-        classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:0.9.0'
+        //classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:0.9.0'
+        classpath fileTree(include: ['*.jar'], dir: 'build/libs')
     }
 }
 

@@ -1,6 +1,9 @@
 # Android Environments build gradle plugin
 [![](https://jitpack.io/v/IlyaPavlovskii/Android-Environments.svg)](https://jitpack.io/#IlyaPavlovskii/Android-Environments)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CI](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)
+[![codecov.io](https://codecov.io/github/IlyaPavlovskii/Android-Environments/coverage.svg?branch=master)](https://codecov.io/github/IlyaPavlovskii/Android-Environments?branch=master)
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android%20Environments%20plugin-green.svg?style=flat )]( https://android-arsenal.com/details/1/7733 )
 
 Плагин предназначен для устранения копирования деклараций переменных 
 окружения для различных типов. Он помогает разработчику избавиться от

@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)
 [![codecov.io](https://codecov.io/github/IlyaPavlovskii/Android-Environments/coverage.svg?branch=master)](https://codecov.io/github/IlyaPavlovskii/Android-Environments?branch=master)
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android%20Environments%20plugin-green.svg?style=flat )]( https://android-arsenal.com/details/1/7733 )
 
 Android Environments plugin helps us to avoid manual declaration of build 
 config fields in each of the build types or product flavors. It's no longer required

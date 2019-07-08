@@ -1,0 +1,4 @@
+key.yaml.test: "yaml release value"
+key.yaml.build.type.bool: true
+key.json.build.type.int: 9
+key.json.build.type.float: 0.4

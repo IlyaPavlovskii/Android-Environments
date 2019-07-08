@@ -17,10 +17,11 @@ package by.bulba.android.environments;
 
 /**
  * Enumeration of possible configuration file format types.
- * */
+ */
 public enum ConfigFormat {
     PROPERTIES("properties"),
-    JSON("json");
+    JSON("json"),
+    YML("yml");
 
     private final String extension;
 
@@ -32,12 +33,14 @@ public enum ConfigFormat {
      * Parse string format value to {@link ConfigFormat}
      *
      * @param format name of configuration format
-     *
      * @throws IllegalArgumentException when passed type is unknown.
-     * */
+     */
     public static ConfigFormat parse(String format) {
         if (JSON.extension.equals(format)) {
             return JSON;
+        }
+        if (YML.extension.equals(format)) {
+            return YML;
         }
         if (PROPERTIES.extension.equals(format)) {
             return PROPERTIES;

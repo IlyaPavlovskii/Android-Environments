@@ -19,8 +19,6 @@ import by.bulba.android.environments.AndroidEnvironmentsExtension;
 import org.gradle.api.Project;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -84,4 +82,49 @@ public class ConfigReaderFactoryImplTest {
         assertThat(reader, instanceOf(PropertyConfigReader.class));
     }
 
+    @Test
+    public void createJsonConfigReaderWhenFileExistsAndFormatIsJson() {
+        extension.format = "json";
+        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
+                project,
+                extension
+        );
+        ConfigReader reader = ((ConfigReaderFactoryImpl) readerFactory)
+                .createJsonConfigReader(new File(""));
+        assertThat(reader, instanceOf(JsonConfigReader.class));
+    }
+
+    @Test
+    public void createJsonConfigReaderByDefaultAndFormatIsJson() {
+        extension.format = "json";
+        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
+                project,
+                extension
+        );
+        ConfigReader reader = readerFactory.create("debug");
+        assertThat(reader, instanceOf(JsonConfigReader.class));
+    }
+
+    @Test
+    public void createYmlConfigReaderWhenFileExistsAndFormatIsYml() {
+        extension.format = "yml";
+        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
+                project,
+                extension
+        );
+        ConfigReader reader = ((ConfigReaderFactoryImpl) readerFactory)
+                .createYamlConfigReader(new File(""));
+        assertThat(reader, instanceOf(YamlConfigReader.class));
+    }
+
+    @Test
+    public void createYmlConfigReaderByDefaultAndFormatIsYml() {
+        extension.format = "yml";
+        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
+                project,
+                extension
+        );
+        ConfigReader reader = readerFactory.create("debug");
+        assertThat(reader, instanceOf(YamlConfigReader.class));
+    }
 }

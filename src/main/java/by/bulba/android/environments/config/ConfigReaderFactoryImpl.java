@@ -22,11 +22,10 @@ import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesti
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -50,6 +49,8 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
         switch (configFormat) {
             case JSON:
                 return createJsonConfigReader(file);
+            case YML:
+                return createYamlConfigReader(file);
             case PROPERTIES:
             default:
                 return createPropertyConfigReader(file);
@@ -70,6 +71,22 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
             throw new RuntimeException(e);
         }
         return new JsonConfigReader(jsonObject);
+    }
+
+    @VisibleForTesting
+    ConfigReader createYamlConfigReader(File file) {
+        Iterable<Object> iterable = null;
+        try {
+            if (file.exists()) {
+                iterable = new Yaml().loadAll(new FileReader(file));
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(iterable == null) {
+            iterable = new ArrayList<>();
+        }
+        return new YamlConfigReader(iterable);
     }
 
     @VisibleForTesting

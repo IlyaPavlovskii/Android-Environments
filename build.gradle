@@ -2,11 +2,13 @@ buildscript {
     repositories {
         google()
         maven { url 'https://jitpack.io' }
+        maven { url "https://plugins.gradle.org/m2/" }
         mavenLocal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:0.9.0'
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7.1"
     }
 }
 
@@ -16,6 +18,7 @@ plugins {
 }
 
 apply from: 'jacoco.gradle'
+apply plugin: 'org.sonarqube'
 
 group 'by.bulba.android.environments'
 version '0.9.0'
@@ -34,6 +37,12 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", 'IlyaPavlovskii_Android-Environments'
     }
 }
 

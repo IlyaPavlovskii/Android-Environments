@@ -1,11 +1,18 @@
 language: java
 install: true
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "ipavlovskii"
+    branches:
+      - master
+
 jdk:
   - oraclejdk9
-dist: trusty
 before_script:
   - rm example/build.gradle
 script:
   - ./gradlew build test jacocoTestReport
+  - sonar-scanner -X
 after_success:
   - bash <(curl -s https://codecov.io/bash)

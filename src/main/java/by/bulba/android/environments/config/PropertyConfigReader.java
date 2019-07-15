@@ -15,6 +15,8 @@
  */
 package by.bulba.android.environments.config;
 
+import by.bulba.android.environments.parser.ConfigTypeParser;
+import by.bulba.android.environments.parser.StringConfigTypeParser;
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ import java.util.Properties;
 /**
  * {@link ConfigValue} for '.property' extension files.
  */
-public class PropertyConfigReader extends BaseConfigReader {
+public class PropertyConfigReader extends BaseConfigReader<String> {
 
     private final Properties properties;
 
@@ -39,7 +41,7 @@ public class PropertyConfigReader extends BaseConfigReader {
         properties.forEach((key, value) -> {
             ConfigValue configValue = new ConfigValue.Builder()
                     .key(toConfigKey((String) key))
-                    .type(parseValueType((String) value))
+                    .type(parseConfigType((String) key))
                     .value((String) value)
                     .build();
             collection.add(configValue);
@@ -47,28 +49,14 @@ public class PropertyConfigReader extends BaseConfigReader {
         return collection;
     }
 
-    @VisibleForTesting
-    ConfigType parseValueType(String value) {
-        if (value == null) {
-            throw new NullPointerException("Missing configuration value");
-        }
-        if (value.matches("-?\\d+L")) {
-            return ConfigType.LONG;
-        }
-        if (value.matches("-?\\d+")) {
-            return ConfigType.INTEGER;
-        }
-        if (value.matches("[-+]?[0-9]*\\.?[0-9]+f")) {
-            return ConfigType.FLOAT;
-        }
-        if ("true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value)) {
-            return ConfigType.BOOLEAN;
-        }
-        return ConfigType.STRING;
-    }
 
     @Override
     public Collection<ConfigValue> getConfigValues() {
         return readPropertyFile(properties);
+    }
+
+    @Override
+    ConfigTypeParser<String> getConfigTypeParser() {
+        return new StringConfigTypeParser();
     }
 }

@@ -1,5 +1,22 @@
+/*
+ * Copyright (C) 2019. Ilya Pavlovskii
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package by.bulba.android.environments.config;
 
+import by.bulba.android.environments.parser.ConfigTypeParser;
+import by.bulba.android.environments.parser.ObjectConfigTypeParser;
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
 import org.json.simple.JSONObject;
 
@@ -7,12 +24,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static by.bulba.android.environments.config.ConfigType.STRING;
-
 /**
  * Configuration reader implementation for ".json" file types.
- * */
-public class JsonConfigReader extends BaseConfigReader {
+ */
+public class JsonConfigReader extends BaseConfigReader<Object> {
 
     private final JSONObject jsonObject;
 
@@ -24,7 +39,7 @@ public class JsonConfigReader extends BaseConfigReader {
     public Collection<ConfigValue> getConfigValues() {
         List<ConfigValue> collection = new ArrayList<>();
         jsonObject.forEach((key, value) -> {
-            ConfigType valueType = parseValueType(value);
+            ConfigType valueType = parseConfigType(value);
             ConfigValue configValue = new ConfigValue.Builder()
                     .key(toConfigKey((String) key))
                     .value(parseValue(value, valueType))
@@ -50,20 +65,8 @@ public class JsonConfigReader extends BaseConfigReader {
         }
     }
 
-    @VisibleForTesting
-    ConfigType parseValueType(Object value) {
-        if (value == null) {
-            throw new NullPointerException("Missing configuration value");
-        }
-        if (value instanceof Integer || value instanceof Long) {
-            return ConfigType.INTEGER;
-        }
-        if (value instanceof Float || value instanceof Double) {
-            return ConfigType.FLOAT;
-        }
-        if (value instanceof Boolean) {
-            return ConfigType.BOOLEAN;
-        }
-        return STRING;
+    @Override
+    ConfigTypeParser<Object> getConfigTypeParser() {
+        return new ObjectConfigTypeParser();
     }
 }

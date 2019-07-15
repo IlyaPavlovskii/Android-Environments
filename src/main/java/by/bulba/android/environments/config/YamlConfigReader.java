@@ -16,6 +16,8 @@
 package by.bulba.android.environments.config;
 
 
+import by.bulba.android.environments.parser.ConfigTypeParser;
+import by.bulba.android.environments.parser.StringConfigTypeParser;
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
@@ -23,37 +25,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static by.bulba.android.environments.config.ConfigType.STRING;
-
 /**
  * ".yml" configuration reader implementation.
  */
-public class YamlConfigReader extends BaseConfigReader {
+public class YamlConfigReader extends BaseConfigReader<String> {
 
-    private final Iterable<Object> yamlIterable;
+    private Map<String, String> map;
 
-    public YamlConfigReader(Iterable<Object> yamlIterable) {
-        this.yamlIterable = yamlIterable;
+    public YamlConfigReader(Map<String, String> model) {
+        this.map = model;
     }
 
     @Override
     public Collection<ConfigValue> getConfigValues() {
         List<ConfigValue> collection = new ArrayList<>();
-
-        yamlIterable.forEach(map -> {
-            if (map instanceof Map) {
-                collection.addAll(parseMap((Map) map));
-            }
-        });
-        return collection;
-    }
-
-    Collection<ConfigValue> parseMap(Map map) {
-        List<ConfigValue> collection = new ArrayList<>();
         map.forEach((key, value) -> {
-            ConfigType valueType = parseValueType(value);
+            ConfigType valueType = parseConfigType(value);
             ConfigValue configValue = new ConfigValue.Builder()
-                    .key(toConfigKey((String) key))
+                    .key(toConfigKey(key))
                     .value(parseValue(value, valueType))
                     .type(valueType)
                     .build();
@@ -65,33 +54,19 @@ public class YamlConfigReader extends BaseConfigReader {
     @VisibleForTesting
     String parseValue(Object value, ConfigType valueType) {
         switch (valueType) {
-            case STRING:
-                return String.format("\"%s\"", String.valueOf(value));
             case FLOAT:
                 return String.format("%sf", String.valueOf(value));
             case LONG:
             case INTEGER:
             case BOOLEAN:
+            case STRING:
             default:
                 return String.valueOf(value);
         }
     }
 
-    @VisibleForTesting
-    ConfigType parseValueType(Object value) {
-        if (value == null) {
-            throw new NullPointerException("Missing configuration value");
-        }
-        if (value instanceof Integer || value instanceof Long) {
-            return ConfigType.INTEGER;
-        }
-        if (value instanceof Float || value instanceof Double) {
-            return ConfigType.FLOAT;
-        }
-        if (value instanceof Boolean) {
-            return ConfigType.BOOLEAN;
-        }
-        return STRING;
+    @Override
+    ConfigTypeParser<String> getConfigTypeParser() {
+        return new StringConfigTypeParser();
     }
-
 }

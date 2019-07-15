@@ -1,0 +1,4 @@
+key.yaml.test: "yaml debug value"
+key.yaml.build.type.bool: false
+key.yaml.build.type.int: 3
+key.yaml.build.type.float: 7.4

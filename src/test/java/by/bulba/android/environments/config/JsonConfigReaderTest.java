@@ -56,12 +56,6 @@ public class JsonConfigReaderTest {
 
     @ParameterizedTest
     @MethodSource("provideParametrizedData")
-    public void checkParseType(Object value, ConfigType expectedType) {
-        assertEquals(expectedType, reader.parseValueType(value));
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideParametrizedData")
     public void checkParseValue(Object value, ConfigType expectedType, String expectedValue) {
         assertEquals(expectedValue, reader.parseValue(value, expectedType));
     }

@@ -13,8 +13,8 @@ import static org.junit.Assert.assertTrue;
 
 public class YamlConfigReaderTest {
 
-    private final Iterable<Object> iterable = new ArrayList<>();
-    private final YamlConfigReader reader = new YamlConfigReader(iterable);
+    private final Map<String, String> map = new HashMap<>();
+    private final YamlConfigReader reader = new YamlConfigReader(map);
 
     public static Stream<Arguments> provideParametrizedData() {
         return Stream.of(
@@ -22,7 +22,7 @@ public class YamlConfigReaderTest {
                 Arguments.of(2L, ConfigType.INTEGER, "2"),
                 Arguments.of(3.1, ConfigType.FLOAT, "3.1f"),
                 Arguments.of(true, ConfigType.BOOLEAN, "true"),
-                Arguments.of("some_res", ConfigType.STRING, "\"some_res\"")
+                Arguments.of("some_res", ConfigType.STRING, "some_res")
         );
     }
 
@@ -33,17 +33,9 @@ public class YamlConfigReaderTest {
 
     @Test
     public void collectValuesWhenJsonIsNotEmpty() {
-        Map<String, String> map = new LinkedHashMap<>();
         map.put("some_key", "some_value");
-        ((List<Object>) iterable).add(map);
         Collection<ConfigValue> collection = reader.getConfigValues();
         assertEquals(1, collection.size());
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideParametrizedData")
-    public void checkParseType(Object value, ConfigType expectedType) {
-        assertEquals(expectedType, reader.parseValueType(value));
     }
 
     @ParameterizedTest

@@ -20,9 +20,7 @@ android {
     }
     environments {
         useBuildTypes = true
-        useProductFlavors = false
-        format = "yml"
-        configFile = "config.yml"
+        useProductFlavors = true
     }
     flavorDimensions 'default'
     productFlavors {

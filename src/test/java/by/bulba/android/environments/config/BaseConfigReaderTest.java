@@ -15,6 +15,7 @@
  */
 package by.bulba.android.environments.config;
 
+import by.bulba.android.environments.parser.ConfigTypeParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -30,6 +31,12 @@ public class BaseConfigReaderTest {
     private static final String EXPECTED_KEY = "KEY_DEBUG_VALUE";
 
     private final BaseConfigReader reader = new BaseConfigReader() {
+        @Override
+        ConfigTypeParser getConfigTypeParser() {
+            // Do nothing
+            return null;
+        }
+
         @Override
         public Collection<ConfigValue> getConfigValues() {
             // Do nothing

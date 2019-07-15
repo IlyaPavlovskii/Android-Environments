@@ -32,6 +32,7 @@ public class ConfigFormatTest {
     public static Stream<Arguments> provideParametrizedData() {
         return Stream.of(
                 Arguments.of("json", ConfigFormat.JSON),
+                Arguments.of("yml", ConfigFormat.YML),
                 Arguments.of("properties", ConfigFormat.PROPERTIES)
         );
     }

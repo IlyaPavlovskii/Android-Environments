@@ -2,15 +2,22 @@
 [![](https://jitpack.io/v/IlyaPavlovskii/Android-Environments.svg)](https://jitpack.io/#IlyaPavlovskii/Android-Environments)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)
+
 [![codecov.io](https://codecov.io/github/IlyaPavlovskii/Android-Environments/coverage.svg?branch=master)](https://codecov.io/github/IlyaPavlovskii/Android-Environments?branch=master)
-[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android%20Environments%20plugin-green.svg?style=flat )]( https://android-arsenal.com/details/1/7733 )
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=IlyaPavlovskii_Android-Environments&metric=alert_status)](https://sonarcloud.io/dashboard?id=IlyaPavlovskii_Android-Environments)
+
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android%20Environments%20plugin-green.svg?style=flat )]( https://android-arsenal.com/details/1/7733 )
 
 [![Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.herokuapp.com%2Fipavlovskii&style=for-the-badge)](https://patreon.com/ipavlovskii)
 
 Android Environments plugin helps us to avoid manual declaration of build 
 config fields in each of the build types or product flavors. It's no longer required
 to write `buildConfigField` for every single field.
+
+## Table of Contents
+- [How to install](#how-to-install)
+- [How to use](#how-to-use)
+- [License](#license)
 
 ### How to install
 Add next fields in your root `build.gradle` file:
@@ -60,6 +67,9 @@ environments {
     // product flavor.
     // Default value - false
     useProductFlavors = true
+    // Configuration file format
+    // Select on of available type for your config file [json,yml,properties - default value]
+    format = "properties"
 }
 ``` 
 
@@ -68,7 +78,7 @@ product flavors folders.
 
 ![Configuration directory!](img/config.png "Configuration directory")
 
-Plugin supports `.properties` file extension only.
+Plugin supports next file extensions:`.json`,`.yml` or `.properties`(by default)
 ```properties
 key.build.type.value="debug value"
 key-int=123
@@ -94,7 +104,37 @@ public final class BuildConfig {
 }
 ```
 
-## License
+### Contributing
+  
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+Please note we have a code of conduct, please follow it in all your interactions with the project.
+When you found some problems, bugs or you want to propose some new features, please see the next rules of the project.
+
+1. Make sure that your issue is not duplicated [here](https://github.com/IlyaPavlovskii/Android-Environments/issues).  
+2. Assign to discuss.
+3. Create a new issue.
+
+Before changes:
+1. Take an issue, move to status "In progress" and assign persons to this task. 
+2. Create a new branch by the next rules:
+```
+$issue-label/ae-$(issue-number)/$iteration-number
+example:
+enhancement/ae-10/0
+```
+3. Commit your changes by the next rules:
+```
+ae-$(issue-number): $short-task-description
+example:
+ae-3: Add JSON config reader property
+```
+4. Pull your changes to remote.
+5. Make sure your changes didn't break something after you, CI build is a success.
+6. When syntax analyzer find some problems with code quality or test quality, please fix it
+or write the causes of deterioration in github issue.
+7. Create pull-request and, optionally, assign some contributors to it.
+
+### License
 
     Copyright (C) 2019 Ilya Pavlovskii
 

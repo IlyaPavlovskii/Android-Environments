@@ -2,9 +2,11 @@
 [![](https://jitpack.io/v/IlyaPavlovskii/Android-Environments.svg)](https://jitpack.io/#IlyaPavlovskii/Android-Environments)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)](https://travis-ci.com/IlyaPavlovskii/Android-Environments.svg?branch=master)
+
 [![codecov.io](https://codecov.io/github/IlyaPavlovskii/Android-Environments/coverage.svg?branch=master)](https://codecov.io/github/IlyaPavlovskii/Android-Environments?branch=master)
-[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android%20Environments%20plugin-green.svg?style=flat )]( https://android-arsenal.com/details/1/7733 )
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=IlyaPavlovskii_Android-Environments&metric=alert_status)](https://sonarcloud.io/dashboard?id=IlyaPavlovskii_Android-Environments)
+
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android%20Environments%20plugin-green.svg?style=flat )]( https://android-arsenal.com/details/1/7733 )
 
 [![Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.herokuapp.com%2Fipavlovskii&style=for-the-badge)](https://patreon.com/ipavlovskii)
 
@@ -12,6 +14,11 @@
 окружения для различных типов. Он помогает разработчику избавиться от
 рутиной работы делкарации билд конфигураций и позволяет это сделать 
 автоматически.
+
+## Оглавление
+- [Как установить](#Как-установить)
+- [Как использовать](#Как-использовать)
+- [Лицензия](#Лицензия)
 
 ### Как установить
 Добавьте следующие строки в Ваш корневой `build.gradle` файл:
@@ -61,6 +68,9 @@ environments {
     // Использовать переменные окружения для различных флейворов
     // Значение по умолчанию - false
     useProductFlavors = true
+    // Формат конфигурационного файла
+    // Один на выбор [json,yml,properties - по умолчанию]
+    format = "properties"
 }
 ``` 
 
@@ -69,7 +79,8 @@ environments {
 
 ![Папка с конфигурациями!](img/config.png "Папка с конфигурациями")
 
-На данный момент плагин поддерживает только `.properties` расширение. 
+Плагин поддерживает 3 формата конфигурационных файлов:
+ `.json`,`.yml` или `.properties`(используется по умолчанию). 
 Пример конфигурационного файла.
 ```properties
 key.build.type.value="debug value"
@@ -97,7 +108,37 @@ public final class BuildConfig {
 }
 ```
 
-## Лицензия
+### Сотрудничество
+
+Если Вы нашли какую-либо проблему, либо хотите предложить что-то новое,
+либо взять в работу одну из существующих задач, пожалуйста, ознакомтесь 
+со следующими правилами участия в проекте.
+
+1. Убедитесь в том, что Ваша задача не была создана [здесь](https://github.com/IlyaPavlovskii/Android-Environments/issues).
+2. Примите участие в обсуждении.
+3. Создайте новую задачу.
+
+Перед внесением изменений:
+1. Возьмите задачу, перенесите ее в статус "В процессе" и назначьте ее исполнителя.
+2. Создайте новую ветку по следующим правилам:
+```
+$тип-задачи/ae-$(номер-задачи)/$номер-итерации
+пример:
+enhancement/ae-10/0
+```
+3. После того как работа над задачей закончена, создайте коммит по следующим правилам:
+```
+ae-$(номер-задачи): $короткое-описание-результата
+```
+4. Залейте ветку с изменениями.
+5. Убедитесь в том, что ваши изменения не сломали рабочую функциональность. 
+Сборка CI(travis-ci) должна быть зеленой. 
+6. Если синтаксический анализатор кода/тестов(sonarqube, codecov) предупреждает о
+созданных проблемах либо недостаточном качестве кода - исправьте это либо опишите 
+причины в задаче на github.
+7. Создайте pull-request и, по желанию, призовите хотя бы одного участника проекта.
+
+### Лицензия
 
     Copyright (C) 2019 Ilya Pavlovskii
 

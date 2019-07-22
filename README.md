@@ -22,15 +22,26 @@ to write `buildConfigField` for every single field.
 
 ### How to install
 Add next fields in your root `build.gradle` file:
+Using plugin DSL:
+```groovy
+plugins {
+  id "android.environments" version "1.0.3"
+}
+```
+Using legacy plugin application:
 ```groovy
 buildscript {
-    repositories {
-        maven { url 'https://jitpack.io' }
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
     }
-    dependencies {
-        classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:1.0.2'
-    }
+  }
+  dependencies {
+    classpath "by.bulba.android.environments:android.environments:1.0.3"
+  }
 }
+
+apply plugin: "android.environments"
 ```
 
 Then setup your application `build.gradle` file:

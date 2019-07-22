@@ -7,7 +7,9 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:1.0.2'
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.10.1'
+        classpath "by.bulba.android.environments:android.environments:1.0.3"
+        //classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:1.0.2'
         //classpath fileTree(include: ['*.jar'], dir: 'build/libs')
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7.1"
     }
@@ -19,17 +21,42 @@ plugins {
 }
 
 apply from: 'jacoco.gradle'
+apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'org.sonarqube'
 
-group 'by.bulba.android.environments'
-version '1.0.3'
+ext {
+    groupName = 'by.bulba.android.environments'
+    artifactId = 'android.environments'
+    versionId = '1.0.3'
+}
+
+group = rootProject.ext.groupName
+version = rootProject.ext.versionId
 
 gradlePlugin {
     plugins {
-        create("AndroidEnvironmentsPlugin") {
-            id = "by.bulba.android.environments"
+        AndroidEnvironmentsPlugin {
+            id = rootProject.artifactId
             implementationClass = "by.bulba.android.environments.AndroidEnvironmentsPlugin"
         }
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/IlyaPavlovskii/Android-Environments/blob/master/README.md'
+    vcsUrl = 'https://github.com/IlyaPavlovskii/Android-Environments'
+    description = 'Android Environments plugin helps us to avoid manual declaration of build config fields in each of the build types or product flavors. It\'s no longer required to write buildConfigField for every single field.'
+    tags = ['android', 'environment', 'gradle', 'plugin']
+
+    plugins {
+        AndroidEnvironmentsPlugin {
+            displayName = 'Android Environments plugin'
+        }
+    }
+    mavenCoordinates {
+        groupId = rootProject.ext.groupName
+        artifactId = rootProject.ext.artifactId
+        version = rootProject.ext.versionId
     }
 }
 

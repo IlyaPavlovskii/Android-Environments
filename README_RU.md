@@ -24,14 +24,24 @@
 ### Как установить
 Добавьте следующие строки в Ваш корневой `build.gradle` файл:
 ```groovy
-buildscript {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
-    dependencies {
-        classpath 'com.github.IlyaPavlovskii.Android-Environments:by.bulba.android.environments.gradle.plugin:1.0.2'
-    }
+plugins {
+  id "android.environments" version "1.0.3"
 }
+```
+Легаси плагин:
+```groovy
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "by.bulba.android.environments:android.environments:1.0.3"
+  }
+}
+
+apply plugin: "android.environments"
 ```
 
 Добавьте плагин и его расширение в `build.gradle` файл вашего приложения:

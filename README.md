@@ -17,6 +17,7 @@ to write `buildConfigField` for every single field.
 ## Table of Contents
 - [How to install](#how-to-install)
 - [How to use](#how-to-use)
+- [Contributing](#contributing)
 - [License](#license)
 
 ### How to install

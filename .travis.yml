@@ -13,6 +13,6 @@ before_script:
   - rm example/build.gradle
 script:
   - ./gradlew build test jacocoTestReport
-  - sonar-scanner -X
+  - sonar-scanner
 after_success:
   - bash <(curl -s https://codecov.io/bash)

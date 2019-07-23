@@ -21,7 +21,7 @@ apply from: 'jacoco.gradle'
 apply plugin: 'org.sonarqube'
 
 group 'by.bulba.android.environments'
-version '1.0.0'
+version '1.0.2'
 
 gradlePlugin {
     plugins {

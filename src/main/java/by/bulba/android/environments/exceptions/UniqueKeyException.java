@@ -13,23 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package by.bulba.android.environments.config;
+package by.bulba.android.environments.exceptions;
 
 import java.io.File;
 
 /**
- * {@link ConfigReader} factory.
- * Plugin have to more than one implementation of configuration reader and have to use
- * different types of reader of each extension.
+ * Duplicate unique key detected.
  */
-public interface ConfigReaderFactory {
+public class UniqueKeyException extends RuntimeException {
 
-    /**
-     * Creates new {@link ConfigReader} implementation of this sub config.
-     *
-     * @param file configuration file.
-     * @return {@link ConfigReader} implementation for current config.
-     */
-    ConfigReader create(File file);
+    public UniqueKeyException(File file, String key) {
+        super("Duplicate key \'" + key + "\' in config file: " + file.getAbsolutePath() + "\n" +
+                "All configuration keys must be unique.");
+    }
 
 }

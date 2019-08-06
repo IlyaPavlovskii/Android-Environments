@@ -15,8 +15,8 @@
  */
 package by.bulba.android.environments;
 
-import by.bulba.android.environments.config.ConfigReader;
-import by.bulba.android.environments.config.ConfigReaderFactory;
+import by.bulba.android.environments.config.ApplicationVariantConfigReaderFactory;
+import by.bulba.android.environments.config.ApplicationVariantConfigValueReader;
 import by.bulba.android.environments.config.ConfigType;
 import by.bulba.android.environments.config.ConfigValue;
 import com.android.build.gradle.AppExtension;
@@ -32,8 +32,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.io.File;
 import java.util.Collections;
@@ -49,7 +47,6 @@ public class AndroidEnvironmentsPluginTest {
 
     private static final String ROOT_PATH = "some/root/dir";
     private static final String CONFIG_PATH = "config/dir";
-    private static final String CONFIG_FILE = "config.proper";
 
     private static final String KEY = "key";
     private static final String VALUE = "val";
@@ -64,9 +61,9 @@ public class AndroidEnvironmentsPluginTest {
     @Mock
     private File rootFile;
     @Mock
-    private ConfigReader configReader;
+    private ApplicationVariantConfigValueReader configReader;
     @Mock
-    private ConfigReaderFactory readerFactory;
+    private ApplicationVariantConfigReaderFactory configReaderFactory;
     @Mock
     private BuildType buildType;
     @Mock
@@ -96,14 +93,17 @@ public class AndroidEnvironmentsPluginTest {
 
         plugin.ext = new AndroidEnvironmentsExtension();
         plugin.ext.configPath = CONFIG_PATH;
-        plugin.ext.configFile = CONFIG_FILE;
+        plugin.configReaderFactory = configReaderFactory;
         when(rootFile.getPath()).thenReturn(ROOT_PATH);
         when(project.getRootDir()).thenReturn(rootFile);
         when(extensionContainer.getByName(eq("android"))).thenReturn(appExtension);
 
 
-        when(configReader.getConfigValues()).thenReturn(Collections.singleton(configValue));
-        when(readerFactory.create(anyString())).thenReturn(configReader);
+        when(configReader.getConfigValues(anyString())).thenReturn(Collections.singleton(configValue));
+        when(configReaderFactory.create(
+                eq(project),
+                any())
+        ).thenReturn(configReader);
 
         when(project.getExtensions()).thenReturn(extensionContainer);
 
@@ -134,7 +134,7 @@ public class AndroidEnvironmentsPluginTest {
 
     @Test
     public void buildConfigFieldOnBuildTypeWhenConfigValuesIsNotEmpty() {
-        plugin.processBuildTypes(readerFactory, appExtension);
+        plugin.processBuildTypes(configReader, appExtension);
         buildTypeConsumer.accept(buildType);
 
         verify(buildType).buildConfigField(
@@ -146,7 +146,7 @@ public class AndroidEnvironmentsPluginTest {
 
     @Test
     public void buildConfigFiledOnApplicationVariantWhenConfigValuesIsNotEmpty() {
-        plugin.processApplicationVariants(readerFactory, appExtension);
+        plugin.processApplicationVariants(configReader, appExtension);
         appVariantConsumer.accept(applicationVariant);
 
         verify(applicationVariant).buildConfigField(

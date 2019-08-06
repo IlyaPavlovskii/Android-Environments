@@ -15,116 +15,115 @@
  */
 package by.bulba.android.environments.config;
 
-import by.bulba.android.environments.AndroidEnvironmentsExtension;
-import org.gradle.api.Project;
+import by.bulba.android.environments.ConfigFormat;
+import org.gradle.internal.impldep.org.junit.runners.Parameterized;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 public class ConfigReaderFactoryImplTest {
 
-    private static final String ROOT_PATH = "some/root/dir";
-    private static final String CONFIG_PATH = "config/dir";
-    private static final String CONFIG_FILE = "config.proper";
-    private static final String PATTERN = ROOT_PATH + "/" +
-            CONFIG_PATH + "/%s/" + CONFIG_FILE;
-
     @Mock
-    private File rootFile;
-    @Mock
-    private Project project;
-    private AndroidEnvironmentsExtension extension = new AndroidEnvironmentsExtension();
+    private File file;
     private ConfigReaderFactoryImpl factory;
 
+    @Parameterized.Parameters
+    public static Stream<Arguments> provideParametrizedData() {
+        return Stream.of(
+                Arguments.of(ConfigFormat.PROPERTIES, PropertyConfigReader.class),
+                Arguments.of(ConfigFormat.JSON, JsonConfigReader.class),
+                Arguments.of(ConfigFormat.YML, YamlConfigReader.class)
+        );
+    }
+
     @Before
-    public void setup() {
+    public void before() {
+        setup();
+    }
+
+    @BeforeEach
+    public void beforeEach() {
+        setup();
+    }
+
+    private void setup() {
         MockitoAnnotations.initMocks(this);
+        when(file.exists()).thenReturn(false);
+        factory = new ConfigReaderFactoryImpl(ConfigFormat.PROPERTIES);
+    }
 
-        extension.configPath = CONFIG_PATH;
-        extension.configFile = CONFIG_FILE;
-        extension.useProductFlavors = true;
-        extension.useBuildTypes = true;
-        when(rootFile.getPath()).thenReturn(ROOT_PATH);
-        when(project.getRootDir()).thenReturn(rootFile);
-        factory = new ConfigReaderFactoryImpl(project, extension);
+    @ParameterizedTest(name =
+            "Factory with format {0} must create reader: {1}"
+    )
+    @MethodSource("provideParametrizedData")
+    public void checkCreateFactory(
+            ConfigFormat format,
+            Class<? extends ConfigReader> configClass) {
+        factory = new ConfigReaderFactoryImpl(format);
+        assertThat(factory.create(file), instanceOf(configClass));
     }
 
     @Test
-    public void checkConfigFilePatternBuilder() {
-        String pattern = factory.readConfigFilePattern(project, extension);
-        assertEquals(PATTERN, pattern);
-    }
-
-    @Test
-    public void createPropertyConfigReaderWhenFileIsNotExists() {
-        when(rootFile.exists()).thenReturn(false);
-        ConfigReader reader = factory.createPropertyConfigReader(rootFile);
-        assertThat(reader, instanceOf(PropertyConfigReader.class));
-    }
-
-    @Test
-    public void createPropertyConfigReaderWhenFileExists() {
-        ConfigReader reader = factory.createPropertyConfigReader(new File(""));
-        assertThat(reader, instanceOf(PropertyConfigReader.class));
-    }
-
-    @Test
-    public void createPropertyConfigReaderByDefault() {
-        ConfigReader reader = factory.create("debug");
-        assertThat(reader, instanceOf(PropertyConfigReader.class));
-    }
-
-    @Test
-    public void createJsonConfigReaderWhenFileExistsAndFormatIsJson() {
-        extension.format = "json";
-        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
-                project,
-                extension
+    public void createEmptyPropertyReaderWhenFileDoesNotExists() {
+        assertThat(
+                factory.createPropertyConfigReader(file),
+                instanceOf(PropertyConfigReader.class)
         );
-        ConfigReader reader = ((ConfigReaderFactoryImpl) readerFactory)
-                .createJsonConfigReader(new File(""));
-        assertThat(reader, instanceOf(JsonConfigReader.class));
     }
 
     @Test
-    public void createJsonConfigReaderByDefaultAndFormatIsJson() {
-        extension.format = "json";
-        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
-                project,
-                extension
+    public void createPropertyReaderWhenFileExists() {
+        file = new File("test_file");
+        assertThat(
+                factory.createPropertyConfigReader(file),
+                instanceOf(PropertyConfigReader.class)
         );
-        ConfigReader reader = readerFactory.create("debug");
-        assertThat(reader, instanceOf(JsonConfigReader.class));
     }
 
     @Test
-    public void createYmlConfigReaderWhenFileExistsAndFormatIsYml() {
-        extension.format = "yml";
-        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
-                project,
-                extension
+    public void createEmptyYmlReaderWhenFileDoesNotExists() {
+        assertThat(
+                factory.createYamlConfigReader(file),
+                instanceOf(YamlConfigReader.class)
         );
-        ConfigReader reader = ((ConfigReaderFactoryImpl) readerFactory)
-                .createYamlConfigReader(new File(""));
-        assertThat(reader, instanceOf(YamlConfigReader.class));
     }
 
     @Test
-    public void createYmlConfigReaderByDefaultAndFormatIsYml() {
-        extension.format = "yml";
-        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(
-                project,
-                extension
+    public void createYmlReaderWhenFileExists() {
+        file = new File("test.yml");
+        assertThat(
+                factory.createYamlConfigReader(file),
+                instanceOf(YamlConfigReader.class)
         );
-        ConfigReader reader = readerFactory.create("debug");
-        assertThat(reader, instanceOf(YamlConfigReader.class));
     }
+
+    @Test
+    public void createEmptyJsonReaderWhenFileDoesNotExists() {
+        assertThat(
+                factory.createJsonConfigReader(file),
+                instanceOf(JsonConfigReader.class)
+        );
+    }
+
+    @Test
+    public void createJsonReaderWhenFileExists() {
+        file = new File("test.yml");
+        assertThat(
+                factory.createJsonConfigReader(file),
+                instanceOf(JsonConfigReader.class)
+        );
+    }
+
 }

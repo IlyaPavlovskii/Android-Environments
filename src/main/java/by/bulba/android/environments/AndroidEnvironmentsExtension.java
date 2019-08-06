@@ -27,10 +27,6 @@ public class AndroidEnvironmentsExtension {
      */
     public String configPath = "config";
     /**
-     * Configuration property file name.
-     */
-    public String configFile = "config.properties";
-    /**
      * Read configuration properties for build types.
      */
     public boolean useBuildTypes = false;
@@ -47,7 +43,6 @@ public class AndroidEnvironmentsExtension {
     @Override
     public String toString() {
         return "Path: " + configPath +
-                " File: " + configFile +
                 " UseBuildTypes: " + useBuildTypes +
                 " UseProductFlavors: " + useProductFlavors +
                 " Format: " + format;

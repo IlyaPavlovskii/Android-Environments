@@ -13,23 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package by.bulba.android.environments.config;
-
-import java.io.File;
-
-/**
- * {@link ConfigReader} factory.
- * Plugin have to more than one implementation of configuration reader and have to use
- * different types of reader of each extension.
- */
-public interface ConfigReaderFactory {
-
-    /**
-     * Creates new {@link ConfigReader} implementation of this sub config.
-     *
-     * @param file configuration file.
-     * @return {@link ConfigReader} implementation for current config.
-     */
-    ConfigReader create(File file);
-
-}
+ 

@@ -15,10 +15,8 @@
  */
 package by.bulba.android.environments.config;
 
-import by.bulba.android.environments.AndroidEnvironmentsExtension;
 import by.bulba.android.environments.ConfigFormat;
 import by.bulba.android.environments.parser.YamlParser;
-import org.gradle.api.Project;
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -37,19 +35,17 @@ import java.util.Properties;
  */
 public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
 
-    private final String configFilePattern;
     private final ConfigFormat configFormat;
 
-    public ConfigReaderFactoryImpl(Project project,
-                                   AndroidEnvironmentsExtension extension) {
-        configFilePattern = readConfigFilePattern(project, extension);
-        configFormat = ConfigFormat.parse(extension.format);
+    /**
+     * @param configFormat configuration file format
+     */
+    public ConfigReaderFactoryImpl(ConfigFormat configFormat) {
+        this.configFormat = configFormat;
     }
 
     @Override
-    public ConfigReader create(String subConfig) {
-        String filePath = String.format(configFilePattern, subConfig);
-        File file = new File(filePath);
+    public ConfigReader create(File file) {
         switch (configFormat) {
             case JSON:
                 return createJsonConfigReader(file);
@@ -106,10 +102,4 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
         return new PropertyConfigReader(properties);
     }
 
-    @VisibleForTesting
-    String readConfigFilePattern(Project project,
-                                 AndroidEnvironmentsExtension ext) {
-        return project.getRootDir().getPath() + "/" +
-                ext.configPath + "/%s/" + ext.configFile;
-    }
 }

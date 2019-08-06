@@ -15,8 +15,8 @@
  */
 package by.bulba.android.environments;
 
-import by.bulba.android.environments.config.ConfigReaderFactory;
-import by.bulba.android.environments.config.ConfigReaderFactoryImpl;
+import by.bulba.android.environments.config.ApplicationVariantConfigReaderFactory;
+import by.bulba.android.environments.config.ApplicationVariantConfigValueReader;
 import com.android.build.gradle.AppExtension;
 import com.android.build.gradle.BaseExtension;
 import org.gradle.api.Plugin;
@@ -29,6 +29,7 @@ class AndroidEnvironmentsPlugin implements Plugin<Project> {
 
     @VisibleForTesting
     AndroidEnvironmentsExtension ext;
+    ApplicationVariantConfigReaderFactory configReaderFactory = new ApplicationVariantConfigReaderFactory();
 
     @Override
     public void apply(@NotNull Project project) {
@@ -46,16 +47,16 @@ class AndroidEnvironmentsPlugin implements Plugin<Project> {
 
     @VisibleForTesting
     void executeTask(Project project) {
-        ConfigReaderFactory readerFactory = new ConfigReaderFactoryImpl(project, ext);
+        ApplicationVariantConfigValueReader reader = configReaderFactory.create(project, ext);
         try {
             Object androidExtension = project
                     .getExtensions()
                     .getByName("android");
             if (ext.useBuildTypes && androidExtension instanceof BaseExtension) {
-                processBuildTypes(readerFactory, (BaseExtension) androidExtension);
+                processBuildTypes(reader, (BaseExtension) androidExtension);
             }
             if (ext.useProductFlavors && androidExtension instanceof AppExtension) {
-                processApplicationVariants(readerFactory, (AppExtension) androidExtension);
+                processApplicationVariants(reader, (AppExtension) androidExtension);
             }
         } catch (UnknownDomainObjectException udoe) {
             throw new RuntimeException(udoe);
@@ -63,9 +64,11 @@ class AndroidEnvironmentsPlugin implements Plugin<Project> {
     }
 
     @VisibleForTesting
-    void processBuildTypes(ConfigReaderFactory readerFactory, BaseExtension extension) {
-        extension.getBuildTypes().forEach(buildType -> readerFactory.create(buildType.getName())
-                .getConfigValues()
+    void processBuildTypes(
+            ApplicationVariantConfigValueReader reader,
+            BaseExtension extension) {
+        extension.getBuildTypes().forEach(buildType -> reader
+                .getConfigValues(buildType.getName())
                 .forEach(configValue -> buildType.buildConfigField(
                         configValue.getType().getConfigString(),
                         configValue.getKey(),
@@ -75,10 +78,11 @@ class AndroidEnvironmentsPlugin implements Plugin<Project> {
     }
 
     @VisibleForTesting
-    void processApplicationVariants(ConfigReaderFactory readerFactory, AppExtension extension) {
-        extension.getApplicationVariants().forEach(applicationVariant -> readerFactory
-                .create(applicationVariant.getFlavorName())
-                .getConfigValues()
+    void processApplicationVariants(
+            ApplicationVariantConfigValueReader reader,
+            AppExtension extension) {
+        extension.getApplicationVariants().forEach(applicationVariant -> reader
+                .getConfigValues(applicationVariant.getFlavorName())
                 .forEach(configValue -> applicationVariant.buildConfigField(
                         configValue.getType().getConfigString(),
                         configValue.getKey(),

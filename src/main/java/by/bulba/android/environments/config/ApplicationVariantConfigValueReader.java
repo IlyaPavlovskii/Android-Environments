@@ -15,21 +15,21 @@
  */
 package by.bulba.android.environments.config;
 
-import java.io.File;
+import java.util.Collection;
 
 /**
- * {@link ConfigReader} factory.
- * Plugin have to more than one implementation of configuration reader and have to use
- * different types of reader of each extension.
- */
-public interface ConfigReaderFactory {
+ * Application variant configuration value reader.
+ * Read values from app variant and collect it into single collection.
+ * All keys must be unique.
+ * */
+public interface ApplicationVariantConfigValueReader {
 
     /**
-     * Creates new {@link ConfigReader} implementation of this sub config.
+     * Read values from app variant and collect it into a
+     * single collection. All keys must be unique.
      *
-     * @param file configuration file.
-     * @return {@link ConfigReader} implementation for current config.
-     */
-    ConfigReader create(File file);
+     * @param appVariant application variant name
+     * */
+    Collection<ConfigValue> getConfigValues(String appVariant);
 
 }

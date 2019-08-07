@@ -38,7 +38,7 @@ public class ApplicationVariantConfigReaderFactory {
     public ApplicationVariantConfigValueReader create(
             Project project,
             AndroidEnvironmentsExtension extension) {
-        File rootConfigPath = new File(project.getRootDir().getPath() + "/" + extension.configPath);
+        File rootConfigPath = new File(project.getRootDir().getPath() + File.pathSeparator + extension.configPath);
         ConfigFormat configFormat = ConfigFormat.parse(extension.format);
         ConfigFileProvider configFileProvider = new ConfigFileProviderImpl(rootConfigPath, configFormat);
         ConfigReaderFactory configReaderFactory = new ConfigReaderFactoryImpl(configFormat);

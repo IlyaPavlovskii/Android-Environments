@@ -56,10 +56,7 @@ location and build config field rules.
 environments { 
     // Environments root directory.
     // Default value - "config" 
-    configPath = "config"  
-    // Configuration file name.
-    // Default value - "config.properties"
-    configFile = "config.properties"
+    configPath = "config"
     // Set to true when you need to use custom environments on each 
     // build types(debug or release).
     // Default value - false
@@ -74,8 +71,9 @@ environments {
 }
 ``` 
 
-Then you'll be able to locate all of your configuration files by build types and 
-product flavors folders.
+Then you'll be able to locate all of your configuration files by build 
+types and product flavors folders. Plugin will read all files with 
+format passed in extension.
 
 ![Configuration directory!](img/config.png "Configuration directory")
 

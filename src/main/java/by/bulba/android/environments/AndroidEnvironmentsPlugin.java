@@ -21,7 +21,6 @@ import com.android.build.gradle.AppExtension;
 import com.android.build.gradle.BaseExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.UnknownDomainObjectException;
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,18 +47,14 @@ class AndroidEnvironmentsPlugin implements Plugin<Project> {
     @VisibleForTesting
     void executeTask(Project project) {
         ApplicationVariantConfigValueReader reader = configReaderFactory.create(project, ext);
-        try {
-            Object androidExtension = project
-                    .getExtensions()
-                    .getByName("android");
-            if (ext.useBuildTypes && androidExtension instanceof BaseExtension) {
-                processBuildTypes(reader, (BaseExtension) androidExtension);
-            }
-            if (ext.useProductFlavors && androidExtension instanceof AppExtension) {
-                processApplicationVariants(reader, (AppExtension) androidExtension);
-            }
-        } catch (UnknownDomainObjectException udoe) {
-            throw new RuntimeException(udoe);
+        Object androidExtension = project
+                .getExtensions()
+                .getByName("android");
+        if (ext.useBuildTypes && androidExtension instanceof BaseExtension) {
+            processBuildTypes(reader, (BaseExtension) androidExtension);
+        }
+        if (ext.useProductFlavors && androidExtension instanceof AppExtension) {
+            processApplicationVariants(reader, (AppExtension) androidExtension);
         }
     }
 

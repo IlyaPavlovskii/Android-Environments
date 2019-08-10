@@ -16,16 +16,15 @@
 package by.bulba.android.environments.config;
 
 import by.bulba.android.environments.ConfigFormat;
+import by.bulba.android.environments.exceptions.ConfigReadException;
+import by.bulba.android.environments.exceptions.ParseConfigException;
 import by.bulba.android.environments.parser.YamlParser;
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -60,22 +59,24 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
     @VisibleForTesting
     ConfigReader createJsonConfigReader(File file) {
         JSONObject jsonObject;
-        try {
-            if (file.exists()) {
-                JSONParser jsonParser = new JSONParser();
-                jsonObject = (JSONObject) jsonParser.parse(new FileReader(file));
-            } else {
-                jsonObject = new JSONObject();
+        if (file.exists()) {
+            JSONParser jsonParser = new JSONParser();
+            try (Reader reader = new FileReader(file)) {
+                jsonObject = (JSONObject) jsonParser.parse(reader);
+            } catch (IOException ioe) {
+                throw new ConfigReadException(ioe);
+            } catch (ParseException pe) {
+                throw new ParseConfigException(pe);
             }
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
+        } else {
+            jsonObject = new JSONObject();
         }
         return new JsonConfigReader(jsonObject);
     }
 
     @VisibleForTesting
     ConfigReader createYamlConfigReader(File file) {
-        Map<String, String> yamlModel = null;
+        Map<String, String> yamlModel;
         try {
             if (file.exists()) {
                 YamlParser parser = new YamlParser(file);
@@ -84,7 +85,7 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
                 yamlModel = new HashMap<>();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ConfigReadException(e);
         }
         return new YamlConfigReader(yamlModel);
     }
@@ -93,10 +94,10 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
     ConfigReader createPropertyConfigReader(File propertiesFile) {
         Properties properties = new Properties();
         if (propertiesFile.exists()) {
-            try {
-                properties.load(new FileInputStream(propertiesFile));
+            try (FileInputStream fis = new FileInputStream(propertiesFile)) {
+                properties.load(fis);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new ConfigReadException(e);
             }
         }
         return new PropertyConfigReader(properties);

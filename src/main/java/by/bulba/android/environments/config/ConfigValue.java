@@ -86,9 +86,6 @@ public class ConfigValue {
 
         private ConfigValue configValue = new ConfigValue();
 
-        public Builder() {
-        }
-
         /**
          * Set configuration key value and return builder instance.
          */

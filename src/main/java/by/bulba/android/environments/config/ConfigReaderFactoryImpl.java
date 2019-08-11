@@ -58,49 +58,60 @@ public class ConfigReaderFactoryImpl implements ConfigReaderFactory {
 
     @VisibleForTesting
     ConfigReader createJsonConfigReader(File file) {
-        JSONObject jsonObject;
+        JSONObject jsonObject = loadJsonFile(file, new JSONParser());
+        return new JsonConfigReader(jsonObject);
+    }
+
+    @VisibleForTesting
+    JSONObject loadJsonFile(File file, JSONParser jsonParser) {
         if (file.exists()) {
-            JSONParser jsonParser = new JSONParser();
             try (Reader reader = new FileReader(file)) {
-                jsonObject = (JSONObject) jsonParser.parse(reader);
+                return (JSONObject) jsonParser.parse(reader);
             } catch (IOException ioe) {
                 throw new ConfigReadException(ioe);
             } catch (ParseException pe) {
                 throw new ParseConfigException(pe);
             }
         } else {
-            jsonObject = new JSONObject();
+            return new JSONObject();
         }
-        return new JsonConfigReader(jsonObject);
     }
 
     @VisibleForTesting
     ConfigReader createYamlConfigReader(File file) {
-        Map<String, String> yamlModel;
-        try {
-            if (file.exists()) {
-                YamlParser parser = new YamlParser(file);
-                yamlModel = parser.parse();
-            } else {
-                yamlModel = new HashMap<>();
-            }
-        } catch (IOException e) {
-            throw new ConfigReadException(e);
-        }
+        Map<String, String> yamlModel = loadYamlFile(file, new YamlParser());
         return new YamlConfigReader(yamlModel);
+    }
+
+    @VisibleForTesting
+    Map<String, String> loadYamlFile(File file, YamlParser parser) {
+        if (file.exists()) {
+            try (Reader reader = new FileReader(file)) {
+                return parser.parse(reader);
+            } catch (IOException e) {
+                throw new ConfigReadException(e);
+            }
+        } else {
+            return new HashMap<>();
+        }
     }
 
     @VisibleForTesting
     ConfigReader createPropertyConfigReader(File propertiesFile) {
         Properties properties = new Properties();
+        loadPropertyFile(propertiesFile, properties);
+        return new PropertyConfigReader(properties);
+    }
+
+    @VisibleForTesting
+    void loadPropertyFile(File propertiesFile, Properties properties) {
         if (propertiesFile.exists()) {
-            try (FileInputStream fis = new FileInputStream(propertiesFile)) {
-                properties.load(fis);
+            try (InputStream is = new FileInputStream(propertiesFile)) {
+                properties.load(is);
             } catch (IOException e) {
                 throw new ConfigReadException(e);
             }
         }
-        return new PropertyConfigReader(properties);
     }
 
 }

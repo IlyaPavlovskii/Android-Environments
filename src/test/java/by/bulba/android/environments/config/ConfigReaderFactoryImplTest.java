@@ -16,7 +16,12 @@
 package by.bulba.android.environments.config;
 
 import by.bulba.android.environments.ConfigFormat;
+import by.bulba.android.environments.exceptions.ConfigReadException;
+import by.bulba.android.environments.exceptions.ParseConfigException;
+import by.bulba.android.environments.parser.YamlParser;
 import org.gradle.internal.impldep.org.junit.runners.Parameterized;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,16 +32,39 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 public class ConfigReaderFactoryImplTest {
 
+    private static final String YML = "test_config.yml";
+    private static final String PROPERTIES = "config.properties";
+    private static final String JSON = "config.json";
+    private final File ymlFile = new File(Objects.requireNonNull(
+            this.getClass().getClassLoader().getResource(YML)).getFile());
+    private final File propertiesFile = new File(Objects.requireNonNull(
+            this.getClass().getClassLoader().getResource(PROPERTIES)).getFile());
+    private final File jsonFile = new File(Objects.requireNonNull(
+            this.getClass().getClassLoader().getResource(JSON)).getFile());
     @Mock
     private File file;
+    @Mock
+    private JSONParser jsonParser;
+    @Mock
+    private YamlParser yamlParser;
+    @Mock
+    private Properties properties;
     private ConfigReaderFactoryImpl factory;
 
     @Parameterized.Parameters
@@ -126,4 +154,44 @@ public class ConfigReaderFactoryImplTest {
         );
     }
 
+    @Test(expected = ConfigReadException.class)
+    public void throwConfigReadExceptionWhenParserThrowIOException() throws IOException, ParseException {
+        when(jsonParser.parse(any(Reader.class))).thenThrow(IOException.class);
+        factory.loadJsonFile(ymlFile, jsonParser);
+    }
+
+    @Test(expected = ParseConfigException.class)
+    public void throwParseConfigExceptionWhenParserThrowParserException() throws IOException, ParseException {
+        when(jsonParser.parse(any(Reader.class))).thenThrow(ParseException.class);
+        factory.loadJsonFile(ymlFile, jsonParser);
+    }
+
+    @Test(expected = ConfigReadException.class)
+    public void throwConfigReadExceptionWhenYamlParserThrowIOException() throws IOException {
+        when(yamlParser.parse(any(Reader.class))).thenThrow(IOException.class);
+        factory.loadYamlFile(ymlFile, yamlParser);
+    }
+
+    @Test(expected = ConfigReadException.class)
+    public void throwConfigReadExceptionWhenLoadPropertiesThrowIoException() throws IOException {
+        doThrow(IOException.class).when(properties).load(any(InputStream.class));
+        factory.loadPropertyFile(ymlFile, properties);
+    }
+
+    @Test
+    public void loadPropertyFileSuccess() {
+        properties = new Properties();
+        factory.loadPropertyFile(propertiesFile, properties);
+        assertTrue(properties.size() > 0);
+    }
+
+    @Test
+    public void loadJsonFileSuccess() {
+        assertTrue(factory.loadJsonFile(jsonFile, new JSONParser()).size() > 0);
+    }
+
+    @Test
+    public void loadYmlFileSuccess() {
+        assertTrue(factory.loadYamlFile(ymlFile, new YamlParser()).size() > 0);
+    }
 }

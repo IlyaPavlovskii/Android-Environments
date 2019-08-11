@@ -21,17 +21,7 @@ import java.util.Map;
 
 public class YamlParser {
 
-    private final Reader reader;
-
-    public YamlParser(File file) throws FileNotFoundException {
-        this(new FileReader(file));
-    }
-
-    public YamlParser(Reader reader) {
-        this.reader = reader;
-    }
-
-    public Map<String, String> parse() throws IOException {
+    public Map<String, String> parse(Reader reader) throws IOException {
         Map<String, String> map = new LinkedHashMap<>();
         try (BufferedReader br = new BufferedReader(reader)) {
             String currentLine;

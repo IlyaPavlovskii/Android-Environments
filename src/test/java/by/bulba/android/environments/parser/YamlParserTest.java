@@ -2,12 +2,14 @@ package by.bulba.android.environments.parser;
 
 
 import org.gradle.internal.impldep.org.junit.runners.Parameterized;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
@@ -22,9 +24,16 @@ class YamlParserTest {
 
     private final File yamlConfig = new File(Objects.requireNonNull(
             this.getClass().getClassLoader().getResource(FILE_NAME)).getFile());
-    private final YamlParser yamlParser = new YamlParser(yamlConfig);
+    private final YamlParser yamlParser = new YamlParser();
+    private FileReader reader;
 
-    public YamlParserTest() throws FileNotFoundException {
+    @BeforeEach
+    public void setup() {
+        try {
+            reader = new FileReader(yamlConfig);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Parameterized.Parameters
@@ -40,14 +49,14 @@ class YamlParserTest {
     @ParameterizedTest
     @MethodSource("provideFileData")
     public void checkParserKeys(String key) throws IOException {
-        Map<String, String> map = yamlParser.parse();
+        Map<String, String> map = yamlParser.parse(reader);
         assertTrue(map.containsKey(key));
     }
 
     @ParameterizedTest
     @MethodSource("provideFileData")
     public void checkParserValues(String key, String value) throws IOException {
-        Map<String, String> map = yamlParser.parse();
+        Map<String, String> map = yamlParser.parse(reader);
         assertEquals(value, map.get(key));
     }
 }

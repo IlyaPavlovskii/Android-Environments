@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":example:main" external.linked.project.path="$MODULE_DIR$/../../../example" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.type="sourceSet" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="freeDebug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleFreeDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileFreeDebugSources" />
+        <afterSyncTasks>
+          <task>generateFreeDebugSources</task>
+        </afterSyncTasks>
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../example/src/main/res;file://$MODULE_DIR$/../../../example/src/free/res;file://$MODULE_DIR$/../../../example/src/debug/res;file://$MODULE_DIR$/../../../example/src/freeDebug/res;file://$MODULE_DIR$/../../../example/build/generated/res/rs/free/debug;file://$MODULE_DIR$/../../../example/build/generated/res/resValues/free/debug" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../example/src/androidTest/res;file://$MODULE_DIR$/../../../example/src/androidTestFree/res;file://$MODULE_DIR$/../../../example/src/androidTestDebug/res;file://$MODULE_DIR$/../../../example/src/androidTestFreeDebug/res;file://$MODULE_DIR$/../../../example/build/generated/res/rs/androidTest/free/debug;file://$MODULE_DIR$/../../../example/build/generated/res/resValues/androidTest/free/debug" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../example/build/generated/aidl_source_output_dir/freeDebug/compileFreeDebugAidl/out" />
+    <content url="file://$MODULE_DIR$/../../../example/build/generated/renderscript_source_output_dir/freeDebug/compileFreeDebugRenderscript/out" />
+    <content url="file://$MODULE_DIR$/../../../example/build/generated/res/resValues/free/debug" />
+    <content url="file://$MODULE_DIR$/../../../example/build/generated/res/rs/free/debug" />
+    <content url="file://$MODULE_DIR$/../../../example/build/generated/source/apt/free/debug" />
+    <content url="file://$MODULE_DIR$/../../../example/build/generated/source/buildConfig/free/debug" />
+    <content url="file://$MODULE_DIR$/../../../example/src/debug" />
+    <content url="file://$MODULE_DIR$/../../../example/src/free" />
+    <content url="file://$MODULE_DIR$/../../../example/src/freeDebug" />
+    <content url="file://$MODULE_DIR$/../../../example/src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../example/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../example/src/main/res" type="java-resource" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: androidx.collection:collection:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.0.2@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.fragment:fragment:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable-animated:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-ui:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-utils:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable:1.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.loader:loader:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.viewpager:viewpager:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.drawerlayout:drawerlayout:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.customview:customview:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.core:core:1.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.versionedparcelable:versionedparcelable:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.cursoradapter:cursoradapter:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.documentfile:documentfile:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.print:print:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel:2.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata:2.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator:1.0.0@aar" level="project" />
+  </component>
+</module>

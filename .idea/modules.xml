@@ -3,9 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-environments.iml" filepath="$PROJECT_DIR$/android-environments.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-environments_main.iml" filepath="$PROJECT_DIR$/.idea/modules/android-environments_main.iml" group="android-environments" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-environments_test.iml" filepath="$PROJECT_DIR$/.idea/modules/android-environments_test.iml" group="android-environments" />
-      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/android-environments.example.iml" filepath="$PROJECT_DIR$/.idea/modules/example/android-environments.example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/android-environments.example.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/example/android-environments.example.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/android-environments.example.main.iml" filepath="$PROJECT_DIR$/.idea/modules/example/android-environments.example.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/android-environments.example.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/example/android-environments.example.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-environments.main.iml" filepath="$PROJECT_DIR$/.idea/modules/android-environments.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-environments.test.iml" filepath="$PROJECT_DIR$/.idea/modules/android-environments.test.iml" />
     </modules>
   </component>
 </project>
